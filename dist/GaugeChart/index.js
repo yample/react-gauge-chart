@@ -106,10 +106,12 @@ var GaugeChart = function GaugeChart(props) {
 
     needle.current = g.current.append('g').attr('class', 'needle'); //Set up resize event listener to re-render the chart everytime the window is resized
 
-    window.addEventListener('resize', function () {
-      var resize = true;
-      renderChart(resize, prevProps, width, margin, height, outerRadius, g, doughnut, arcChart, needle, pieChart, svg, props, container, arcData);
-    });
+    if(typeof window !== 'undefined'){ // if not nextjs server side
+      window.addEventListener('resize', function () {
+        var resize = true;
+        renderChart(resize, prevProps, width, margin, height, outerRadius, g, doughnut, arcChart, needle, pieChart, svg, props, container, arcData);
+      });
+    }
     renderChart(resize, prevProps, width, margin, height, outerRadius, g, doughnut, arcChart, needle, pieChart, svg, props, container, arcData);
   };
 
